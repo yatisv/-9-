@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОГЭ Информатика — задания 1-16</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: #f2f5f9;
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .exam-container {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0,10,30,0.15);
+            padding: 35px 40px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-top: 0;
+            color: #0b1f3b;
+            border-left: 8px solid #1e5f8e;
+            padding-left: 25px;
+        }
+        .subhead {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            padding-left: 33px;
+        }
+        .timer-panel {
+            background: linear-gradient(145deg, #0b2a41, #1e4f6e);
+            color: white;
+            border-radius: 60px;
+            padding: 15px 30px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .timer-display {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 6px;
+            background: #0000002e;
+            padding: 8px 25px;
+            border-radius: 60px;
+            border: 2px solid #ffd966;
+        }
+        .status-badge {
+            background: #0b2a41;
+            color: white;
+            border-radius: 40px;
+            padding: 8px 25px;
+            font-weight: 600;
+        }
+        .name-panel {
+            background: #e3eff9;
+            border-radius: 60px;
+            padding: 15px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+        .name-inputs input {
+            padding: 12px 20px;
+            border-radius: 40px;
+            border: 2px solid #b2c9e0;
+            background: white;
+            font-size: 1rem;
+            min-width: 180px;
+        }
+        .task-card {
+            background: #ffffff;
+            border: 1px solid #d9e2ef;
+            border-radius: 24px;
+            padding: 20px 28px;
+            margin-bottom: 25px;
+        }
+        .task-num {
+            display: inline-block;
+            background: #1e5f8e;
+            color: white;
+            font-weight: 600;
+            padding: 5px 18px;
+            border-radius: 40px;
+            margin-bottom: 15px;
+        }
+        .task-text {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #1a2b3c;
+            margin-bottom: 15px;
+        }
+        .binary-string {
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            background: #e9f0fa;
+            padding: 10px 18px;
+            border-radius: 40px;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+        table {
+            background: #f0f6fd;
+            border-collapse: collapse;
+            margin: 15px 0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        table td, table th {
+            border: 1px solid #b9cee8;
+            padding: 8px 12px;
+            background-color: white;
+        }
+        .answer-area {
+            margin: 15px 0 5px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+        }
+        .answer-input {
+            padding: 12px 18px;
+            font-size: 1rem;
+            border: 2px solid #b2c9e0;
+            border-radius: 60px;
+            width: 260px;
+            background: white;
+        }
+        .answer-input:disabled {
+            background: #f0f3f8;
+            color: #555;
+        }
+        .file-download-block {
+            background: #e3eff9;
+            border-radius: 18px;
+            padding: 16px 22px;
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 25px;
+        }
+        .file-link {
+            background: #0b2a41;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: 1px solid #1e5f8e;
+        }
+        .file-link:hover {
+            background: #1e5f8e;
+        }
+        .expert-badge {
+            background: #f0b37b;
+            color: #000;
+            padding: 4px 15px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .alternative-block {
+            background: #f9f9ff;
+            border: 2px solid #b0c4de;
+            border-radius: 24px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .alternative-title {
+            font-weight: 700;
+            color: #1e5f8e;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .choice-indicator {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .choice-btn {
+            padding: 10px 30px;
+            border-radius: 40px;
+            border: 2px solid #1e5f8e;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .choice-btn.active {
+            background: #1e5f8e;
+            color: white;
+        }
+        .choice-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .finish-btn-container {
+            margin: 40px 0 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .finish-exam-btn {
+            background: #b13e3e;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+            padding: 20px 60px;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #631f1f;
+            transition: 0.1s;
+        }
+        .finish-exam-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #631f1f;
+        }
+        .finish-exam-btn:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .result-modal {
+            background: #e0f0fa;
+            border-radius: 50px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+            border: 4px solid #1e5f8e;
+        }
+        .image-placeholder {
+            background: #f5f8ff;
+            border: 2px dashed #a0b9d6;
+            border-radius: 24px;
+            padding: 30px 20px;
+            margin: 15px 0;
+            text-align: center;
+            color: #4a6382;
+            font-style: italic;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        hr {
+            border-top: 2px dashed #cbd6e6;
+            margin: 30px 0;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .action-btn {
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+        .action-btn.clear {
+            background: #6c757d;
+        }
+        .action-btn.reset {
+            background: #dc3545;
+        }
+        .action-btn.new {
+            background: #28a745;
+        }
+    </style>
+    <script src="answers.js"></script>
+</head>
+<body>
+<div class="exam-container" id="examContainer">
+    <h1>📘 ОГЭ Информатика Пробный экзамен</h1>
+	<h2> Вариант - 1.</h2>
+    <div class="subhead">Задания 1-16</div>
+
+    <!-- Таймер и статус -->
+    <div class="timer-panel">
+        <div class="timer-display" id="timer">02:55:00</div>
+        <div class="status-badge" id="examStatus">⏳ Экзамен идёт</div>
+    </div>
+
+    <!-- ФИО участника + кнопки -->
+    <div class="name-panel" id="namePanel">
+        <div class="name-inputs">
+            <input type="text" id="surname" placeholder="Фамилия" value="Фамилия" disabled>
+            <input type="text" id="name" placeholder="Имя" value="Имя" disabled>
+        </div>
+        <div class="status-badge">участник</div>
+    </div>
+
+    <!-- Кнопки действий -->
+    <div class="action-buttons" id="actionButtons"></div>
+
+    <!-- ========== ЗАДАНИЕ 1 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 1</div>
+       
+        <div class="task-text">В одной из кодировок Unicode каждый символ кодируется 16 битами. Вова написал текст: <strong>«Заяц, волк, хорёк, суслик, лама, медведь, гиена, аллигатор – дикие животные»</strong>. Затем вычеркнул название одного животного и лишние запятые с пробелами. Размер нового предложения оказался на <strong>22 байта</strong> меньше. Какое животное вычеркнуто?</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans1" placeholder="животное" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 2 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 2</div>
+        <div class="image-placeholder"><img src="2.PNG" alt="Рисунок 2" onerror="this.parentElement.innerHTML='🖼️ Место для таблицы кодировки'"></div>
+        <div class="binary-string">111101001001110011001</div>
+        <div class="task-text">В пароле использовались только буквы А, Б, К, Л, О, С. Каждая буква кодировалась двоичным словом по таблице. Расшифруйте сообщение.</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans2" placeholder="пароль" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 3 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 3</div>
+        <div class="task-text">Найти наименьшее число x, для которого истинно: <strong>НЕ (x < 20) И НЕ (x нечётное)</strong></div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans3" placeholder="число x" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 4 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 4</div>
+        <div class="image-placeholder"><img src="4.PNG" alt="Рисунок 4" onerror="this.parentElement.innerHTML='🖼️ Место для таблицы'"></div>
+        <div class="task-text">Учитель Иван Петрович живёт на станции А, а работает на станции D. Он должен ехать по самой короткой дороге, обязательно заехав на станцию С. Найдите длину кратчайшего пути А → С → D.</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans4" placeholder="длина пути" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 5 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 5</div>
+        <div class="task-text">У исполнителя Альфа команды:<br><b>1. прибавь 1;<br>2. умножь на b, где (b ≥ 2).</b><br><br>Программа 111211 переводит число 7 в число 92. Найдите b.</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans5" placeholder="b" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 6 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 6</div>
+        <div class="image-placeholder"><img src="6.PNG" alt="Рисунок 6" onerror="this.parentElement.innerHTML='🖼️ Место для 6.PNG (код программы)'"></div>
+        <div class="task-text">Было проведено 9 запусков программы с парами:<br><b>(1, 2); (11, 2); (1, 12); (11, 12); (–11, –12);
+(–11, 12); (–12, 11); (10, 10); (10, 5).</b><br>Сколько запусков выдали «ДА»?</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans6" placeholder="количество" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 7 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 7</div>
+        <div class="task-text">Доступ к файлу table.xls на сервере home.ru по протоколу ftp. Фрагменты:<br><strong>1) home<br>2) ://<br>3) .ru<br>4) ftp<br>5) table<br>6) .xls<br>7) /</strong><br>Запишите последовательность цифр.</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans7" placeholder="например 4213576" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 8 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 8</div>
+        <div class="task-text">Ниже приведены запросы и количество страниц, которые нашел поисковый сервер по этим запросам в некотором сегменте Интернета:<br><b>торты | пироги = 12000<br>торты & пироги = 6500<br>пироги = 7700</b><br>Сколько страниц по запросу "торты"?</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans8" placeholder="число" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 9 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 9</div>
+        <div class="image-placeholder"><img src="9.PNG" alt="Рисунок 9" onerror="this.parentElement.innerHTML='🖼️ Место для 9.PNG (схема дорог)'"></div>
+        <div class="task-text">На рисунке – схема дорог, связывающих города A, B, C, D, E, F, G и H. По каждой дороге можно двигаться только в одном направлении, указанном стрелкой. Сколько путей из А в Н, проходящих через С?</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans9" placeholder="количество путей" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 10 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 10</div>
+        <div class="image-placeholder"><img src="10.PNG" alt="Рисунок 10" onerror="this.parentElement.innerHTML='🖼️ Место для чисел в СС'"></div>
+        <div class="task-text">Среди трёх чисел в разных системах счисления найдите максимальное и запишите в десятичной.</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans10" placeholder="десятичное число" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 11 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 11</div>
+        <div class="file-download-block">
+            <span>📁 Архив oge12.zip (Тургенев)</span>
+            <a class="file-link" href="DEMO-12.rar" target="_blank" onclick="return confirm('Вы переходите на Яндекс.Диск для скачивания файла. Продолжить?');">⬇️ oge12.zip</a>
+        </div>
+        <div class="task-text">В одном из произведений И.С. Тургенева, текст которого приведён в подкаталоге Тургенев, встречается персонаж по фамилии Майданов. С помощью поисковых средств операционной системы и текстового редактора выясните, какую поэму он написал.</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans11" placeholder="название поэмы" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 12 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 12</div>
+        <div class="file-download-block">
+            <span>📁 Архив oge12.zip (Поэзия)</span>
+            <a class="file-link" href="DEMO-12.rar" target="_blank" onclick="return confirm('Вы переходите на Яндекс.Диск для скачивания файла. Продолжить?');">⬇️ oge12.zip</a>
+        </div>
+        <div class="task-text">Сколько файлов .pdf в подкаталогах каталога Поэзия?</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" type="text" id="ans12" placeholder="число" disabled>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 13 (АЛЬТЕРНАТИВА) ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 13 (выберите ОДНО из двух)</div>
+        
+        <!-- Переключатель вариантов -->
+        <div class="choice-indicator">
+            <button class="choice-btn active" id="choice13_1" onclick="selectTask13(1)" disabled>13.1 Презентация</button>
+            <button class="choice-btn" id="choice13_2" onclick="selectTask13(2)" disabled>13.2 Текстовый документ</button>
+        </div>
+
+        <!-- Вариант 13.1 - Презентация "Орёл" -->
+        <div id="task13_1_block" class="alternative-block">
+            <div class="alternative-title">Вариант 13.1: Презентация «Орёл»</div>
+            <div class="image-placeholder"><img src="13.PNG" alt="Макет слайдов" onerror="this.parentElement.innerHTML='🖼️ Место для 13.PNG (макет слайдов)'"></div>
+            <div class="file-download-block">
+                <span>📦 Архив vorel.zip (орлы)</span>
+                <a class="file-link" href="vorel.zip" target="_blank" onclick="return confirm('Вы переходите для скачивания файла. Продолжить?');">⬇️ vorel.zip</a>
+            </div>
+            <div class="task-text">Используя информацию и иллюстративный материал, содержащийся в файлах архива, создайте презентацию из трёх слайдов на тему «Орёл». В презентации должны содержаться краткие иллюстрированные сведения о внешнем виде, ареале обитания и образе жизни орлов. Все слайды должны быть выполнены в едином стиле, каждый слайд должен быть озаглавлен. В презентации должен использоваться единый тип шрифта. Требования к оформлению: слайды 16:9, ориентация альбомная; первый слайд титульный, второй и третий по образцу на рисунке. Шрифты: заголовок 40, подзаголовки 24, текст 20.</div>
+            <div class="answer-area">
+                <input class="answer-input" id="ans13_1" placeholder="файл презентации .pptx" disabled>
+                <span class="expert-badge">эксперт</span>
+            </div>
+        </div>
+
+        <!-- Вариант 13.2 - Текстовый документ "Литий" -->
+        <div id="task13_2_block" class="alternative-block" style="display: none;">
+            <div class="alternative-title">Вариант 13.2: Текстовый документ «Литий»</div>
+            <div class="image-placeholder">🖼️ Место для рисунка образца</div>
+            <div class="task-text">Создайте документ с текстом про литий, точно воспроизведя оформление (шрифт 14, отступ 1 см, таблица свойств).</div>
+            <div style="background:#f5f5f5; padding:15px; border-radius:12px; margin:10px 0;">
+                <p><strong>Литий (Li, лат. lithium)</strong> — химический элемент первой группы, второго периода периодической системы с атомным номером 3. Как простое вещество представляет собой мягкий щелочной металл серебристо-белого цвета. <u>Литий твёрже натрия, но мягче свинца.</u> Его можно обрабатывать прессованием и прокаткой.</p>
+                <table style="width:100%">
+                    <tr><td>Плотность</td><td>0,53 г/см³</td></tr>
+                    <tr><td>Температура плавления</td><td>180 °С</td></tr>
+                    <tr><td>Температура кипения</td><td>1340 °С</td></tr>
+                </table>
+            </div>
+            <div class="answer-area">
+                <input class="answer-input" id="ans13_2" placeholder="имя файла .docx" disabled>
+                <span class="expert-badge">эксперт</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 14 (с Excel) ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 14 — электронная таблица</div>
+        
+        <div class="file-download-block">
+            <span>📊 Excel-файл с данными</span>
+            <a class="file-link" href="okrug.xls" target="_blank" onclick="return confirm('Вы переходите для скачивания файла. Продолжить?');">⬇️ table.xlsx</a>
+        </div>
+        
+        <div class="task-text">В электронную таблицу занесли данные о тестировании учеников по выбранным ими предметам. В столбце A записан код округа, в котором учится ученик; в столбце B – фамилия; в столбце C – выбранный учеником предмет; в столбце D – тестовый балл. Всего в электронную таблицу были занесены данные 1000 учеников. На основании данных, содержащихся в этой таблице, выполните задания.</div>
+        <table>
+            <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+            <tr><td>СВ</td><td>Ученик 1</td><td>Физика</td><td>240</td></tr>
+            <tr><td>B</td><td>Ученик 2</td><td>Физкультура</td><td>78</td></tr>
+            <tr><td>Ю</td><td>Ученик 3</td><td>Биология</td><td>361</td></tr>
+            <tr><td>СВ</td><td>Ученик 4</td><td>Обществознание</td><td>377</td></tr>
+        </table>
+        <div class="task-text">1) Н2: сколько учеников из округа «СВ», сдававших биологию, набрали менее 600 баллов?</div>
+        <div class="task-text">2) Н3: средний балл учеников СВ по биологии (не менее двух знаков).</div>
+        <div class="task-text">3) Постройте круговую диаграмму для округов В, З, ЮВ (эксперт).</div>
+        <div class="answer-area">
+            <input class="answer-input task-input" id="h2" placeholder="Н2" style="width:100px;" disabled>
+            <input class="answer-input task-input" id="h3" placeholder="Н3" style="width:120px;" disabled>
+            <span class="expert-badge">диаграмма эксперт</span>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 15 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 15</div>
+        <div class="image-placeholder"><img src="15.PNG" alt="Рисунок 15" onerror="this.parentElement.innerHTML='🖼️ Место для рисунка поля с роботом'"></div>
+        <div class="task-text">Напишите алгоритм для Робота, закрашивающий все клетки выше горизонтальной стены и левее вертикальной стены, кроме стартовой.</div>
+        <div class="answer-area">
+            <input class="answer-input" id="ans15" placeholder="алгоритм" disabled>
+            <span class="expert-badge">эксперт</span>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 16 ========== -->
+    <div class="task-card">
+        <div class="task-num">Задание 16</div>
+        <div class="image-placeholder"><img src="16.PNG" alt="Рисунок 16" onerror="this.parentElement.innerHTML='🖼️ Место для входных данных'"></div>
+        <div class="task-text">Напишите программу, которая в последовательности натуральных чисел определяет сумму всех чисел, кратных 7 и оканчивающихся на 2. Программа получает на вход натуральные числа, количество введённых чисел неизвестно, последовательность чисел заканчивается числом 0 (0 – признак окончания ввода, не входит в последовательность). Количество чисел не превышает 1000. Введённые числа не превышают 30 000. Программа должна вывести одно число: сумму всех чисел, кратных 7 и оканчивающихся на 2.</div>
+        <div class="answer-area">
+            <input class="answer-input" id="ans16" placeholder="файл .py/.cpp" disabled>
+            <span class="expert-badge">эксперт</span>
+        </div>
+    </div>
+
+    <!-- КНОПКА ЗАВЕРШЕНИЯ -->
+    <div class="finish-btn-container">
+        <button class="finish-exam-btn" id="finishExamBtn">✅ ЗАВЕРШИТЬ ЭКЗАМЕН</button>
+    </div>
+
+    <!-- РЕЗУЛЬТАТ -->
+    <div id="resultArea"></div>
+    <hr>
+    <footer>✅ МКОУ Северная СШ. 2026 год</footer>
+</div>
+<script>
+    (function() {
+       
+        let correct = {};
+        
+       
+        if (typeof window.getCorrectAnswers === 'function') {
+            correct = window.getCorrectAnswers();
+            console.log('Ответы загружены из внешнего файла');
+        } else {
+            alert('Ошибка загрузки конфигурации экзамена. Пожалуйста, обратитесь к преподавателю.');
+            document.querySelectorAll('input, button').forEach(el => el.disabled = true);
+            return;
+        }
+
+        let examFinished = false;
+        let selectedTask13 = 1;
+        
+        const timerEl = document.getElementById('timer');
+        const finishBtn = document.getElementById('finishExamBtn');
+        const resultDiv = document.getElementById('resultArea');
+        const statusBadge = document.getElementById('examStatus');
+        const surnameInput = document.getElementById('surname');
+        const nameInput = document.getElementById('name');
+
+        // Все поля ввода
+        const allInputs = document.querySelectorAll('.task-input, #ans13_1, #ans13_2, #ans15, #ans16, #h2, #h3');
+        const fileLinks = document.querySelectorAll('.file-link');
+        
+        // Кнопки выбора варианта в задании 13
+        const choiceBtn1 = document.getElementById('choice13_1');
+        const choiceBtn2 = document.getElementById('choice13_2');
+        const block13_1 = document.getElementById('task13_1_block');
+        const block13_2 = document.getElementById('task13_2_block');
+
+        // Функция переключения между вариантами 13.1 и 13.2
+        window.selectTask13 = function(choice) {
+            if (examFinished) return;
+            selectedTask13 = choice;
+            if (choice === 1) {
+                choiceBtn1.classList.add('active');
+                choiceBtn2.classList.remove('active');
+                block13_1.style.display = 'block';
+                block13_2.style.display = 'none';
+            } else {
+                choiceBtn1.classList.remove('active');
+                choiceBtn2.classList.add('active');
+                block13_1.style.display = 'none';
+                block13_2.style.display = 'block';
+            }
+        };
+
+        const EXAM_TIME = 10500; // 2:55
+        let timeLeft = EXAM_TIME;
+        let timerInterval = null;
+
+        function loadTimer() {
+            const savedEnd = localStorage.getItem('examEndTimeFull');
+            if (savedEnd) {
+                const remaining = Math.max(0, Math.floor((parseInt(savedEnd) - Date.now()) / 1000));
+                timeLeft = remaining > 0 ? remaining : 0;
+            } else {
+                localStorage.setItem('examEndTimeFull', Date.now() + EXAM_TIME * 1000);
+            }
+        }
+
+        function updateTimerDisplay() {
+            const hrs = Math.floor(timeLeft / 3600);
+            const mins = Math.floor((timeLeft % 3600) / 60);
+            const secs = timeLeft % 60;
+            timerEl.textContent = `${hrs.toString().padStart(2,'0')}:${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+            if (timeLeft <= 0) timerEl.textContent = '00:00:00';
+        }
+
+        function blockAllInputs(disabled = true) {
+            allInputs.forEach(inp => inp.disabled = disabled);
+            fileLinks.forEach(link => link.style.pointerEvents = disabled ? 'none' : 'auto');
+            surnameInput.disabled = disabled;
+            nameInput.disabled = disabled;
+            choiceBtn1.disabled = disabled;
+            choiceBtn2.disabled = disabled;
+        }
+
+        // Функция проверки, заполнены ли первые 10 заданий
+        function areFirst10Answered() {
+            for (let i = 1; i <= 10; i++) {
+                const inp = document.getElementById(`ans${i}`);
+                if (!inp || !inp.value || inp.value.trim() === '') {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Обновление состояния кнопки завершения
+        function updateFinishButtonState() {
+            if (examFinished) {
+                finishBtn.disabled = true;
+                return;
+            }
+            
+            if (areFirst10Answered()) {
+                finishBtn.disabled = false;
+                finishBtn.style.opacity = '1';
+                finishBtn.style.cursor = 'pointer';
+            } else {
+                finishBtn.disabled = true;
+                finishBtn.style.opacity = '0.5';
+                finishBtn.style.cursor = 'not-allowed';
+            }
+        }
+
+        // Функции для управления
+        function newStudent() {
+            if (confirm('Начать экзамен для нового ученика? Все текущие ответы будут удалены.')) {
+                allInputs.forEach(inp => { if (inp) inp.value = ''; });
+                localStorage.clear();
+                if (resultDiv) resultDiv.innerHTML = '';
+                
+                clearInterval(timerInterval);
+                timeLeft = EXAM_TIME;
+                updateTimerDisplay();
+                localStorage.setItem('examEndTimeFull', Date.now() + EXAM_TIME * 1000);
+                
+                timerInterval = setInterval(() => {
+                    if (examFinished) return;
+                    timeLeft--;
+                    updateTimerDisplay();
+                    localStorage.setItem('examEndTimeFull', Date.now() + timeLeft * 1000);
+                    if (timeLeft <= 0) finishExam();
+                }, 1000);
+                
+                examFinished = false;
+                blockAllInputs(false);
+                updateFinishButtonState();
+                statusBadge.innerText = '⏳ Экзамен идёт';
+            }
+        }
+
+        function clearAnswers() {
+            if (examFinished) {
+                alert('Экзамен уже завершён, нельзя очищать ответы.');
+                return;
+            }
+            if (confirm('Очистить все введённые ответы? Таймер продолжится.')) {
+                allInputs.forEach(inp => { if (inp) inp.value = ''; });
+                allInputs.forEach(inp => {
+                    const id = inp.id;
+                    if (id) localStorage.removeItem(`ansFull_${id}`);
+                });
+                if (resultDiv) resultDiv.innerHTML = '';
+                updateFinishButtonState();
+            }
+        }
+
+        function resetExam() {
+            if (confirm('Сбросить экзамен? Таймер начнётся заново, все ответы будут удалены.')) {
+                allInputs.forEach(inp => { if (inp) inp.value = ''; });
+                localStorage.clear();
+                if (resultDiv) resultDiv.innerHTML = '';
+                
+                clearInterval(timerInterval);
+                timeLeft = EXAM_TIME;
+                updateTimerDisplay();
+                localStorage.setItem('examEndTimeFull', Date.now() + EXAM_TIME * 1000);
+                
+                timerInterval = setInterval(() => {
+                    if (examFinished) return;
+                    timeLeft--;
+                    updateTimerDisplay();
+                    localStorage.setItem('examEndTimeFull', Date.now() + timeLeft * 1000);
+                    if (timeLeft <= 0) finishExam();
+                }, 1000);
+                
+                examFinished = false;
+                blockAllInputs(false);
+                updateFinishButtonState();
+                statusBadge.innerText = '⏳ Экзамен идёт';
+            }
+        }
+
+        // Создаём кнопки
+        const actionDiv = document.getElementById('actionButtons');
+        if (actionDiv) {
+            const newBtn = document.createElement('button');
+            newBtn.className = 'action-btn new';
+            newBtn.textContent = '👤 Новый ученик';
+            newBtn.onclick = newStudent;
+            
+            const clearBtn = document.createElement('button');
+            clearBtn.className = 'action-btn clear';
+            clearBtn.textContent = '🗑️ Очистить ответы';
+            clearBtn.onclick = clearAnswers;
+            
+            const resetBtn = document.createElement('button');
+            resetBtn.className = 'action-btn reset';
+            resetBtn.textContent = '🔄 Сбросить экзамен';
+            resetBtn.onclick = resetExam;
+            
+            actionDiv.appendChild(newBtn);
+            actionDiv.appendChild(clearBtn);
+            actionDiv.appendChild(resetBtn);
+        }
+
+        function showResult() {
+            let correctCount = 0;
+            
+            // Задания 1-12
+            for (let i = 1; i <= 12; i++) {
+                const inp = document.getElementById(`ans${i}`);
+                if (inp && inp.value) {
+                    let user = inp.value.trim().toLowerCase().replace(/\s+/g, '');
+                    let corr = correct[`ans${i}`] ? correct[`ans${i}`].toLowerCase().replace(/\s+/g, '') : '';
+                    if (user === corr) correctCount++;
+                }
+            }
+            
+            // Задание 14 (h2 и h3)
+            const h2 = document.getElementById('h2')?.value.trim().toLowerCase().replace(/\s+/g, '');
+            const h3 = document.getElementById('h3')?.value.trim().toLowerCase().replace(/\s+/g, '');
+            if (h2 && correct.h2 && h2 === correct.h2.toLowerCase().replace(/\s+/g, '')) correctCount++;
+            if (h3 && (h3 === correct.h3.toLowerCase().replace(/\s+/g, '') || h3 === '502,98' || h3 === '502.98')) correctCount++;
+
+            const maxScore = 14; // 12 + 2
+            let grade = '2';
+            if (correctCount >= 5 && correctCount <= 10) grade = '3';
+            else if (correctCount >= 11 && correctCount <= 14) grade = '4';
+            else if (correctCount >= 15) grade = '5';
+
+            const fullName = `${surnameInput.value.trim()} ${nameInput.value.trim()}`.trim() || 'Участник';
+            const selectedVariant = selectedTask13 === 1 ? '13.1 (презентация)' : '13.2 (текст)';
+
+            resultDiv.innerHTML = `
+                <div class="result-modal">
+                    <h2>📋 РЕЗУЛЬТАТ ЭКЗАМЕНА — ВАРИАНТ 2</h2>
+                    <p style="font-size:1.8rem;">${fullName}</p>
+                    <p>Выполнен вариант: ${selectedVariant}</p>
+                    <p>Задания 1-12 + таблица (№14): <strong>${correctCount} из ${maxScore}</strong></p>
+                    <p style="font-size:2rem; background:#1e5f8e; color:white; display:inline-block; padding:10px 40px; border-radius:60px;">ОЦЕНКА: ${grade}</p>
+                    <p>🗂️ Задания 13, 15, 16 проверяются экспертом и не влияют на автоматическую оценку.</p>
+                </div>
+            `;
+        }
+
+        function finishExam() {
+            if (examFinished) return;
+            
+            // Дополнительная проверка перед завершением
+            if (!areFirst10Answered()) {
+                alert('Необходимо ответить на первые 10 заданий перед завершением экзамена!');
+                return;
+            }
+            
+            examFinished = true;
+            clearInterval(timerInterval);
+            localStorage.removeItem('examEndTimeFull');
+            blockAllInputs(true);
+            finishBtn.disabled = true;
+            statusBadge.innerText = '⏹ Экзамен завершён';
+            showResult();
+        }
+
+        function initExam() {
+            loadTimer();
+            
+            if (timeLeft <= 0) {
+                localStorage.clear();
+                timeLeft = EXAM_TIME;
+                localStorage.setItem('examEndTimeFull', Date.now() + EXAM_TIME * 1000);
+            }
+            
+            examFinished = false;
+            blockAllInputs(false);
+            finishBtn.disabled = true; // По умолчанию кнопка неактивна
+            finishBtn.style.opacity = '0.5';
+            finishBtn.style.cursor = 'not-allowed';
+            statusBadge.innerText = '⏳ Экзамен идёт';
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                if (examFinished) return;
+                timeLeft--;
+                updateTimerDisplay();
+                localStorage.setItem('examEndTimeFull', Date.now() + timeLeft * 1000);
+                if (timeLeft <= 0) finishExam();
+            }, 1000);
+        }
+
+        function loadAnswers() {
+            const savedEnd = localStorage.getItem('examEndTimeFull');
+            if (savedEnd) {
+                const remaining = Math.max(0, Math.floor((parseInt(savedEnd) - Date.now()) / 1000));
+                if (remaining > 0) {
+                    allInputs.forEach(inp => {
+                        const id = inp.id;
+                        if (id) {
+                            const saved = localStorage.getItem(`ansFull_${id}`);
+                            if (saved) inp.value = saved;
+                        }
+                    });
+                }
+            }
+            // После загрузки ответов обновляем состояние кнопки
+            setTimeout(updateFinishButtonState, 100);
+        }
+        
+        function saveAnswers() {
+            if (examFinished) return;
+            allInputs.forEach(inp => {
+                const id = inp.id;
+                if (id) localStorage.setItem(`ansFull_${id}`, inp.value);
+            });
+            // Обновляем состояние кнопки при каждом изменении
+            updateFinishButtonState();
+        }
+        
+        allInputs.forEach(inp => inp.addEventListener('input', saveAnswers));
+
+        finishBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!areFirst10Answered()) {
+                alert('Необходимо ответить на первые 10 заданий перед завершением экзамена!');
+                return;
+            }
+            if (confirm('Завершить экзамен? Ответы сохранятся, но изменить их будет нельзя.')) {
+                finishExam();
+            }
+        });
+
+        // Загружаем сохранённые ответы и инициализируем
+        loadAnswers();
+        initExam();
+        
+        // Сохраняем при выгрузке
+        window.addEventListener('beforeunload', () => saveAnswers());
+    })();
+</script>
+
+</body>
+</html>
